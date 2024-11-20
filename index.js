@@ -15,10 +15,10 @@ async function scrapeAndSaveMarkdown(url, outputFileName) {
     const data = await response.json();
 
     // Extract name from the first element
-    const firstElementName = data[0]?.result?.data?.json?.name || null;
+    const firstElementName = data[1]?.result?.data?.json?.name || null;
 
     // Extract and process details from the second element
-    const secondElementDetails = data[1]?.result?.data?.json.map(item => {
+    const secondElementDetails = data[2]?.result?.data?.json.map(item => {
       const markdownBody = item.body
         ? turndownService.turndown(item.body) // Convert HTML to Markdown
         : null;
@@ -50,4 +50,4 @@ async function scrapeAndSaveMarkdown(url, outputFileName) {
 }
 
 // Example usage: Replace with the actual URL and desired file name
-scrapeAndSaveMarkdown('https://typeshare.co/api/trpc/templates.getPackBySlug,templates.getTemplatesByPackSlug,templates.getClaimedPacks?batch=1&input=%7B%220%22%3A%7B%22json%22%3A%7B%22packSlug%22%3A%22resonance%22%7D%7D%2C%221%22%3A%7B%22json%22%3A%7B%22packSlug%22%3A%22resonance%22%7D%7D%2C%222%22%3A%7B%22json%22%3Anull%2C%22meta%22%3A%7B%22values%22%3A%5B%22undefined%22%5D%7D%7D%7D', 'Audience-Building-resonance.md');
+scrapeAndSaveMarkdown('API_URL', 'FILE_NAME.md');
